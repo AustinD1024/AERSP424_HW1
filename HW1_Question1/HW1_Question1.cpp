@@ -1,8 +1,4 @@
 // HW1_Question1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-
-//BE SURE TO CHECK FrontSeatWeights and RearSeatWeights and how I allocated memory for them
 
 #include <iostream>
 #include <array>
@@ -131,7 +127,7 @@ int main()
 	double FuelMoment = TotalFuelWeight * FuelTankMomentArm;
 	double BaggageMoment = BaggageWeight * BaggageMomentArm;
 	double MomentConstant = AirplaneEW_Moment + FrontSeatMoment + RearSeatMoment + BaggageMoment; //constant moment
-
+	
 	double TotalMoment;
 	TotalMoment = MomentConstant + FuelMoment;
 
@@ -142,11 +138,11 @@ int main()
 
 	//Output current Gross Weight and CG
 	std::cout << "From the current design parameters:\n\n";
-	std::cout << "		The current Gross Weight is  " << std::fixed << std::setprecision(2) << GrossWeight << " pounds\n";
-	std::cout << "			&\n";
-	std::cout << "		The current C.G. is " << std::fixed << std::setprecision(1) << CG << " inches\n\n";
+	std::cout << "		*The current Gross Weight is  " << std::fixed << std::setprecision(2) << GrossWeight << " pounds\n";
+	std::cout << "		*The current C.G. is " << std::fixed << std::setprecision(1) << CG << " inches\n\n";
 
 	//If design parameters are okay:
+	
 	if ((GrossWeight <= MaxGrossWeight) && (CG >= MinCG) && (CG <= MaxCG))
 	{
 		std::cout << "Therefore the design parameters are good!\n"
@@ -158,40 +154,83 @@ int main()
 	//Adjust Fuel in order to correct parameters if design parameters are not okay
 	else 
 	{
-
-		// Calculate required fuel adjustment
-		double FuelAdjustment;
-		if (GrossWeight > MaxGrossWeight) 
+		bool Solution = false;
+		//Possible Solution 1:
+		
+		//CG Options
+		double CG_options;
+		double ReqFuelWeight;
+		double i = 0;
+		int j = 0;
+		//Loop through all possible CG locations and see if there is a combination of fuel and gross weight to meet design specifications
+		for (i = MinCG; i < MaxCG; i += 0.01)	//loop through CG locations in increments of 0.01 inches
 		{
-			FuelAdjustment = GrossWeight - MaxGrossWeight;
-			TotalFuelWeight = TotalFuelWeight - FuelAdjustment;
+			CG_options = i;
+			ReqFuelWeight = (CG_options * GrossWeightConstant - MomentConstant) / (FuelTankMomentArm - CG_options); //req fuel weight for CG
+			TotalFuelWeight = ReqFuelWeight;
 			FuelMoment = TotalFuelWeight * FuelTankMomentArm;
 			GrossWeight = GrossWeightConstant + TotalFuelWeight;
 			TotalMoment = MomentConstant + FuelMoment;
 			CG = TotalMoment / GrossWeight;
-
-		}
-		if (CG < MinCG || CG > MaxCG)
-		{
-			if (CG < MinCG) 
+			if (GrossWeight <= MaxGrossWeight && (ReqFuelWeight/UsableFuelWeight) > 0) //checks to make sure Gross weight is okay and Gallons of req fuel > 0
 			{
-				double ReqFuelWeight = ((MinCG * GrossWeightConstant) - MomentConstant) / (FuelTankMomentArm - MinCG);
-				TotalFuelWeight = ReqFuelWeight;
-				FuelMoment = TotalFuelWeight * FuelTankMomentArm;
-				GrossWeight = GrossWeightConstant + TotalFuelWeight;
-				TotalMoment = MomentConstant + FuelMoment;
-				CG = TotalMoment / GrossWeight;
+				Solution = true;
+				break;
+			}
+			j++;
+		}
+
+		
+
+		////Possible Solution 2: (Probably will delete)
+
+		//if (GrossWeight > MaxGrossWeight)
+		//{
+		//	if (CG < MinCG)
+		//	{
+		//		while (CG < MinCG || CG > MaxCG)
+		//		{
+		//			TotalFuelWeight = TotalFuelWeight - 0.01;
+		//			FuelMoment = TotalFuelWeight * FuelTankMomentArm;
+		//			GrossWeight = GrossWeightConstant + TotalFuelWeight;
+		//			TotalMoment = MomentConstant + FuelMoment;
+		//			CG = TotalMoment / GrossWeight;
+		//		}
+		//	}
+		//	else
+		//	{
+		//		Solution = false;
+		//	}
+
+		//}
+		////FINISH
+
+		//Output if there is a solution
+		if (Solution == true)
+		{
+
+			
+			std::cout << "Because the original design parameters did not meet the design limits,"
+				" adjustments to the amount of gallons of fuel were made to meet the design limits.\n\n";
+			double WeightChange = (TotalFuelWeight - OriginalFuelWeight) / UsableFuelWeight;
+			if (WeightChange < 0)
+			{
+				std::cout << "There was a fuel adjustment of " << std::fixed << std::setprecision(2) << WeightChange << "gallons.\n\n";
+			}
+			else
+			{
+				std::cout << WeightChange << " gallons of fuel were added\n\n";
 			}
 			
-		}
+			std::cout << "This resulted in the following new gross weight and C.G. Location:\n\n";
+			std::cout << "		*New Gross Weight: " << std::fixed << std::setprecision(2) << GrossWeight << " pounds\n";
+			std::cout << "		*New C.G. Location: " << std::fixed << std::setprecision(1) << CG << " inches\n";
 
-	
-		std::cout << "Because the original design parameters did not meet the design limits,\n"
-			" adjustments to the amount of gallons of fuel were made to meet the design limits.\n";
-		std::cout << "There was a fuel adjustment of " << std::fixed << std::setprecision(2) << (OriginalFuelWeight - TotalFuelWeight)/UsableFuelWeight << "gallons.\n\n";
-		std::cout << "This resulted in the following new gross weight and C.G. Location:\n\n";
-		std::cout << "New Gross Weight: " << std::fixed << std::setprecision(2) << GrossWeight << " pounds\n";
-		std::cout << "New C.G. Location: " << std::fixed << std::setprecision(1) << CG << " inches\n";
+		}
+		else
+		{
+			std::cout << "There is no possible design configuration that meets the specifications.";
+		}
 
 
 	}
