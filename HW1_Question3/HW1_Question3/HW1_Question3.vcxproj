@@ -129,6 +129,10 @@
   <ItemGroup>
     <ClCompile Include="HW1_Question3.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pilot.h" />
+    <ClInclude Include="Plane.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

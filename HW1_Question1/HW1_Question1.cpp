@@ -154,37 +154,8 @@ int main()
 	//Adjust Fuel in order to correct parameters if design parameters are not okay
 	else 
 	{
-		////This solution works but not the "logic" that is wanted
 		bool Solution = false;
-		////Possible Solution 1:
-		//
-		////CG Options
-		//double CG_options;
-		//double ReqFuelWeight;
-		//double i = 0;
-		//int j = 0;
-		////Loop through all possible CG locations and see if there is a combination of fuel and gross weight to meet design specifications
-		//for (i = MinCG; i < MaxCG; i += 0.01)	//loop through CG locations in increments of 0.01 inches
-		//{
-		//	CG_options = i;
-		//	ReqFuelWeight = (CG_options * GrossWeightConstant - MomentConstant) / (FuelTankMomentArm - CG_options); //req fuel weight for CG
-		//	TotalFuelWeight = ReqFuelWeight;
-		//	FuelMoment = TotalFuelWeight * FuelTankMomentArm;
-		//	GrossWeight = GrossWeightConstant + TotalFuelWeight;
-		//	TotalMoment = MomentConstant + FuelMoment;
-		//	CG = TotalMoment / GrossWeight;
-		//	if (GrossWeight <= MaxGrossWeight && (ReqFuelWeight/UsableFuelWeight) > 0) //checks to make sure Gross weight is okay and Gallons of req fuel > 0
-		//	{
-		//		Solution = true;
-		//		break;
-		//	}
-		//	j++;
-		//}
-
-		
-
-		//Possible Solution 2: (Probably will delete)
-
+	
 		while (GrossWeight >= MaxGrossWeight || (CG < MinCG || CG > MaxCG))
 		{
 			if (CG < MinCG) //Need to remove fuel weight
