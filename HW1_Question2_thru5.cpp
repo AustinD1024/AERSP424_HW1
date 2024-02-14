@@ -36,7 +36,7 @@ int main()
         std::cout << "Time: " << i * timeStep << " seconds, Position: " << PlaneObject.getPos() << " miles. \n";
     }
 
-    
+
     return 0;
 
 }

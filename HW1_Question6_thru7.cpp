@@ -69,5 +69,8 @@ int main()
 
     }
 
+    delete Pilot1.myPlane;
+    delete Pilot2.myPlane;
+
     return 0;
 };
