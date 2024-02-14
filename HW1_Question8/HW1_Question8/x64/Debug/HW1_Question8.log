@@ -1,0 +1,4 @@
+﻿  Question8.cpp
+C:\Users\945au\OneDrive\Desktop\AERSP 424 HW 1\HW1_Question8\HW1_Question8\Question8.cpp(179,27): warning C4311: '<function-style-cast>': pointer truncation from 'Plane *' to 'int'
+C:\Users\945au\OneDrive\Desktop\AERSP 424 HW 1\HW1_Question8\HW1_Question8\Question8.cpp(179,27): warning C4302: '<function-style-cast>': truncation from 'Plane *' to 'int'
+  HW1_Question8.vcxproj -> C:\Users\945au\OneDrive\Desktop\AERSP 424 HW 1\HW1_Question8\HW1_Question8\x64\Debug\HW1_Question8.exe
