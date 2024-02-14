@@ -138,7 +138,7 @@ public:
         return name;
     }
     //Pointer
-    std::unique_ptr<Plane> myPlane{};     //HOW TO DO MODERN POINTER std::unique_ptr<Plane> myPlane; ????
+    std::unique_ptr<Plane> myPlane{};
 
 };
 //***************************End QUESTION 6 (Pilot Class)*************************************//

@@ -12,7 +12,7 @@ private:
 
 public:
     //Constructor
-    Pilot(std::string PilotName, Plane* plane) :myPlane(plane)
+    Pilot(std::string PilotName)
     {
         name = PilotName;
         std::cout << "Pilot " << name << " with certificate number " << &name << " is at the gate, ready to board the plane.\n";

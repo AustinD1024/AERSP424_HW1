@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Question6.cpp" />
+    <ClInclude Include="..\..\..\AERSP 424 HW 1 Submission\Question 6 through 7\Pilot.h" />
+    <ClInclude Include="..\..\..\AERSP 424 HW 1 Submission\Question 6 through 7\Plane.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pilot.h" />
-    <ClInclude Include="Plane.h" />
+    <ClCompile Include="HW1_Question6_thru7.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
